@@ -8,35 +8,10 @@ public class Gc {
 			System.out.println(rt.freeMemory());
 		}
 	}
+	public enum asd{
+		asd,asdf,adsf,adsfdd
+	}
 }
 
 
 
-/*
-*target*
-*.jar
-*.war
-*.ear
-*.class
-
-# eclipse specific git ignore
-*.pydevproject
-.project
-.metadata
-bin/**
-tmp/**
-tmp/**/*
-*.tmp
-*.bak
-*.swp
-*~.nib
-local.properties
-.classpath
-.settings/
-.loadpath
-
-# External tool builders
-.externalToolBuilders/
-
-# Locally stored "Eclipse launch configurations"
-*.launch*/
