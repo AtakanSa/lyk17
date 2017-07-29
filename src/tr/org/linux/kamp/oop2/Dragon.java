@@ -2,6 +2,10 @@ package tr.org.linux.kamp.oop2;
 
 public class Dragon extends Monster implements flyable,fearer {
 
+	void FireBreath() {
+		System.out.println("ARRRGGHHGHG");
+	}
+	
 	@Override
 	void frighten() {
 	
