@@ -2,6 +2,8 @@ package tr.org.linux.kamp.GameExamp;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
+
 
 public abstract class GameObject {
 	private int x;
@@ -43,6 +45,11 @@ public abstract class GameObject {
 	public void Draw(Graphics2D g2d) {
 		g2d.setColor(getColor());
 		g2d.fillOval(getX(), getY(), getRadius(), getRadius());
+	}
+	
+	public Rectangle getRectangle() {
+		Rectangle rect = new Rectangle(getX(),getY(),getRadius(),getRadius());
+		return rect;
 	}
 
 }

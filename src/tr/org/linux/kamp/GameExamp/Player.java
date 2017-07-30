@@ -6,8 +6,9 @@ public class Player extends GameObject{
 
 	private int speed;
 	
-	public Player(int x, int y, int radius, Color color) {
+	public Player(int x, int y, int radius, Color color,int speed) {
 		super(x, y, radius, color);
+		this.speed=speed;
 		// TODO Auto-generated constructor stub
 	}
 	
