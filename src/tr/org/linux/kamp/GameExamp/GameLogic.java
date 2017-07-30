@@ -17,7 +17,8 @@ public class GameLogic {
 	private boolean isGameRunning;
 	private int xTarget;
 	private int yTarget;
-	ArrayList<GameObject> objectsToRemove;
+	ArrayList<GameObject> chipsToRemove;
+	ArrayList<GameObject> minesToRemove;
 
 	private Random random;
 
@@ -27,7 +28,8 @@ public class GameLogic {
 		gameObjects.add(player);
 		gameFrame = new GameFrame();
 		gamePanel = new GamePanel(gameObjects);
-		objectsToRemove = new ArrayList<>();
+		chipsToRemove = new ArrayList<>();
+		minesToRemove = new ArrayList<>();
 		random = new Random();
 		fillChips(10);
 		fillMines(8);
@@ -41,24 +43,28 @@ public class GameLogic {
 			if (player.getRectangle().intersects(gameObject.getRectangle())) {
 				if (gameObject instanceof Chip) {
 					player.setRadius(player.getRadius() + gameObject.getRadius());
-					objectsToRemove.add(gameObject);
+					chipsToRemove.add(gameObject);
 
 				}
 				if (gameObject instanceof Mine) {
 					player.setRadius((int)player.getRadius()/2);
-					objectsToRemove.add(gameObject);
+					minesToRemove.add(gameObject);
 
 				}
 			}
 		}
 
-		gameObjects.removeAll(objectsToRemove);
+		gameObjects.removeAll(chipsToRemove);
+		gameObjects.removeAll(minesToRemove);
 
 	}
 
-	private synchronized void addNewObjects(ArrayList<GameObject> objectsToRemove) {
-		fillChips(objectsToRemove.size());
-		objectsToRemove.clear();
+	
+	private synchronized void addNewObjects() {
+		fillChips(chipsToRemove.size());
+		fillMines(minesToRemove.size());
+		minesToRemove.clear();
+		chipsToRemove.clear();
 
 	}
 
@@ -105,7 +111,7 @@ public class GameLogic {
 				while (isGameRunning) {
 					movePlayer();
 					checkCollisions();
-					addNewObjects(objectsToRemove);
+					addNewObjects();
 
 					gamePanel.repaint();
 					try {
