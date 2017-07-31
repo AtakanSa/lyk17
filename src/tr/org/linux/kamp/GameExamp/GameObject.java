@@ -8,7 +8,7 @@ import java.awt.Rectangle;
 public abstract class GameObject {
 	private int x;
 	private int y;
-	private int radius;
+	private int radius,speed;
 	private Color color;
 	public int getX() {
 		return x;
@@ -34,8 +34,15 @@ public abstract class GameObject {
 	public void setColor(Color color) {
 		this.color = color;
 	}
-	public GameObject(int x, int y, int radius, Color color) {
+	public int getSpeed() {
+		return speed;
+	}
+	public void setSpeed(int speed) {
+		this.speed = speed;
+	}
+	public GameObject(int x, int y, int radius, Color color,int speed) {
 		super();
+		this.speed = speed;
 		this.x = x;
 		this.y = y;
 		this.radius = radius;
