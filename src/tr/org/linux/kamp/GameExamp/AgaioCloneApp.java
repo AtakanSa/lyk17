@@ -8,11 +8,12 @@ import tr.org.linux.kamp.WindowBuilder.FirstPanel.Difficulty;
 
 public class AgaioCloneApp {
 	public static void main(String[] args) {
-	
-	
-		GameLogic gameLogic = new GameLogic("",Color.black,Difficulty.EASY);
-	
+		/**
+		 * creating gameLogic object for game start
+		 */
+		GameLogic gameLogic = new GameLogic("", Color.black, Difficulty.EASY);
+
 		gameLogic.startApp();
-		
+
 	}
 }

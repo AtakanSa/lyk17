@@ -8,10 +8,15 @@ import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
 import java.util.Random;
 
-import javax.swing.JLabel;
-
 import tr.org.linux.kamp.WindowBuilder.FirstPanel.Difficulty;
 
+/**
+ * Controller class.Every gameObject movement and actions controlling here. sets
+ * game start and gameover
+ * 
+ * @author atakan
+ *
+ */
 public class GameLogic {
 
 	private Player player;
@@ -29,6 +34,12 @@ public class GameLogic {
 
 	private Random random;
 
+	/**
+	 * 
+	 * @param name  for game's name
+	 * @param color
+	 * @param dif for game's diffucilty.It changes mine,enemie and chip numbers.
+	 */
 	public GameLogic(String name, Color color, Difficulty dif) {
 		player = new Player(10, 10, 15, color, 4, name);
 
@@ -62,6 +73,9 @@ public class GameLogic {
 
 	}
 
+	/**
+	 * Checking gameObjects collision each other.For every gameObject it changes how to act.
+	 */
 	private synchronized void checkCollisions() {
 
 		for (GameObject gameObject : gameObjects) {
@@ -111,7 +125,9 @@ public class GameLogic {
 		gameObjects.removeAll(minesToRemove);
 
 	}
-
+/**
+ * when we eat chip,enemy or collision with mines.They remove and creating new one's in here.
+ */
 	private synchronized void addNewObjects() {
 		fillChips(chipsToRemove.size());
 		fillMines(minesToRemove.size());
@@ -122,6 +138,9 @@ public class GameLogic {
 
 	}
 
+	/**
+	 * Player's movement with mouse controller.If mouse on the right,Player goes right.
+	 */
 	private synchronized void movePlayer() {
 
 		if (xTarget > player.getX()) {
@@ -136,7 +155,9 @@ public class GameLogic {
 		}
 
 	}
-
+/**
+ * Enemie's movement.If enemy radius higher then player,it chases player.Else it runs.
+ */
 	private synchronized void moveEnemy() {
 		for (GameObject enemy : gameObjects) {
 			if (enemy instanceof Enemy) {
@@ -183,7 +204,15 @@ public class GameLogic {
 			}
 		}
 	}
-
+	
+/**
+ * 
+ * @param enemy for moving enemy gameObject.
+ * @param distance for between distance with enemy and player
+ * @param X will be calculated X coordinate
+ * @param Y will be calculated Y coordinate
+ * @return
+ */
 	private boolean CalculateNewDistanceToEnemy(Enemy enemy, int distance, int X, int Y) {
 		int newDistance = (int) Point.distance(player.getX(), player.getY(), X, Y);
 		if (newDistance > distance) {
@@ -194,6 +223,10 @@ public class GameLogic {
 		return false;
 	}
 
+	/**
+	 * Adds chips into game
+	 * @param n
+	 */
 	private synchronized void fillChips(int n) {
 		for (int i = 0; i < n; i++) {
 			gameObjects.add(new Chip(random.nextInt(1000), random.nextInt(1000), 10, Color.GREEN, 0));
@@ -201,7 +234,10 @@ public class GameLogic {
 		}
 
 	}
-
+/**
+ * Adds Enemies into game
+ * @param n
+ */
 	private void fillEnemies(int n) {
 		for (int i = 0; i < n; i++) {
 			Enemy enemy = new Enemy(random.nextInt(1000), random.nextInt(1000), random.nextInt(10) + 10,
@@ -214,7 +250,10 @@ public class GameLogic {
 			gameObjects.add(enemy);
 		}
 	}
-
+/**
+ * Adds mines into game
+ * @param n
+ */
 	private void fillMines(int n) {
 		for (int i = 0; i < n; i++) {
 			Mine mine = new Mine(random.nextInt(1000), random.nextInt(1000), 14, Color.RED, 0);
@@ -225,7 +264,10 @@ public class GameLogic {
 			gameObjects.add(mine);
 		}
 	}
-
+/**
+ * Start game thread.It contains player movement,checkCollisions,Adds newObjects and Enemies movement
+ * Doing this with 50 ms delay.
+ */
 	private void startGame() {
 		new Thread(new Runnable() {
 
@@ -248,7 +290,10 @@ public class GameLogic {
 
 		}).start();
 	}
-
+/**
+ * Sets isGameRunning param to true for game start.
+ * set Visible our game window.
+ */
 	public void startApp() {
 		gameFrame.setContentPane(gamePanel);
 		gameFrame.setVisible(true);
@@ -256,7 +301,9 @@ public class GameLogic {
 		startGame();
 
 	}
-
+/**
+ * Listens our mouse Actions for player movement.
+ */
 	private void addMouseEvent() {
 		gameFrame.addMouseListener(new MouseListener() {
 

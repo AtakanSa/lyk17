@@ -4,7 +4,23 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 
+/**
+ * 
+ * @author atakan
+ **
+ */
 
+
+/**
+ * 
+ * @author atakan
+ *Base class for every gameObject in game.Player,chips,enemies and mines are created from this class.
+ *@param x for objects x coordinate
+ *@param y for objects y coordinate
+ *@param radius for objects size
+ *@param speed for objects movement speed
+ *@param color for color
+ */
 public abstract class GameObject {
 	private int x;
 	private int y;
@@ -40,7 +56,17 @@ public abstract class GameObject {
 	public void setSpeed(int speed) {
 		this.speed = speed;
 	}
-	public GameObject(int x, int y, int radius, Color color,int speed) {
+	
+	/**
+	 * 
+	 * @param x
+	 * @param y
+	 * @param radius
+	 * @param color
+	 * @param speed
+	 * our constructor class.Takes first values when object creating
+	 */
+		public GameObject(int x, int y, int radius, Color color,int speed) {
 		super();
 		this.speed = speed;
 		this.x = x;
@@ -49,11 +75,19 @@ public abstract class GameObject {
 		this.color = color;
 	}
 	
+		/**
+		 * 
+		 * @param g2d for gameObject we need to draw on screen
+		 */
 	public void Draw(Graphics2D g2d) {
 		g2d.setColor(getColor());
 		g2d.fillOval(getX(), getY(), getRadius(), getRadius());
 	}
 	
+	/**
+	 * Using this class for  checking collisions.Getting Coordinates and Size.
+	 * @return
+	 */
 	public Rectangle getRectangle() {
 		Rectangle rect = new Rectangle(getX(),getY(),getRadius(),getRadius());
 		return rect;
