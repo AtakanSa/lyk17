@@ -7,11 +7,15 @@ import java.awt.Graphics2D;
 public class Player extends GameObject {
 
 	private String name;
+
 	/**
 	 * 
-	 * @param x for coordinate from upper class(GameObject)
-	 * @param y for coordinate from upper class(GameObject)
-	 * @param radius player's size from upper class
+	 * @param x
+	 *            for coordinate from upper class(GameObject)
+	 * @param y
+	 *            for coordinate from upper class(GameObject)
+	 * @param radius
+	 *            player's size from upper class
 	 * @param color
 	 * @param speed
 	 * @param name
@@ -27,12 +31,10 @@ public class Player extends GameObject {
 
 	}
 
-	
 	/**
-	 * sets player's size.
-	 * it cant reach minimum and maximum size
+	 * sets player's size. it cant reach minimum and maximum size
 	 */
-	
+
 	@Override
 	public void setRadius(int radius) {
 		if (getRadius() + radius > 10 && getRadius() + radius < 250) {
